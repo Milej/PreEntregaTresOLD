@@ -3,4 +3,60 @@
   margin: 0;
 }
 
+.no-show {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+.button:hover {
+  cursor: pointer;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f5e1ce;
+  padding: 8px;
+  color: #444;
+}
+.nav .nav-brand {
+  display: flex;
+  align-items: center;
+}
+.nav .nav-brand__logo {
+  margin: 0 1rem;
+}
+.nav .nav-brand__name {
+  font-size: 2rem;
+  font-weight: bold;
+}
+.nav .nav-brand__button {
+  display: none;
+}
+.nav .navigation {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+.nav .navigation__item {
+  padding: 0 2rem;
+}
+.nav .navigation__link {
+  font-size: 20px;
+  text-decoration: none;
+  color: #444;
+  letter-spacing: 2px;
+}
+
 /*# sourceMappingURL=app.css.map */

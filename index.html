@@ -8,15 +8,43 @@
   <title>Mascotienda</title>
 
   <link rel="stylesheet" href="./css/app.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
 </head>
 <body>
   
   <!-- Barra de navegacion -->
   <nav class="nav">
 
-    <div class="brand">
+    <div class="nav-brand">
+
+      <img class="nav-brand__logo" src="./img/logo.webp" alt="Logo" width="80">
+      <span class="nav-brand__name">Mascotienda Zamba</span>
+      <button type="button" class="button nav-brand__button">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
       
     </div>
+
+    <ul class="navigation">
+      
+      <li class="navigation__item">
+        <a href="#" class="navigation__link">Inicio</a>
+      </li>
+      <li class="navigation__item">
+        <a href="#" class="navigation__link">Productos</a>
+      </li>
+      <li class="navigation__item">
+        <a href="#" class="navigation__link">Contacto</a>
+      </li>
+      <li class="navigation__item">
+        <a href="#" class="navigation__link">
+          <span class="material-symbols-outlined">shopping_cart</span>
+        </a>
+      </li>
+
+    </ul>
 
   </nav>
 
