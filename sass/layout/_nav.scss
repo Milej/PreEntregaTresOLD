@@ -1,76 +1,50 @@
-$flag: false;
-.nav{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.navbar{
   background-color: $other;
-  padding: 8px;
-  color: #444;
+  padding: 8px; 
 
-  & .nav-brand{
-    display: flex;
-    align-items: center;
-    
-    &__logo{ 
-      margin: 0 1rem;
-    }
+  &-brand{
+    color: #444 !important; 
+  }
 
-    &__name{
-      font-size: 2rem;
-      font-weight: bold;
-    }
+  &-toggler{
+    border: none;
 
-    &__button{
-      display: none;
+    &:focus{
+      outline: none;
+      box-shadow: none;
     }
   }
 
-  & .navigation{
-    display: flex;
-    align-items: center;
-    list-style: none;
-    
-    &__item{
-      padding: 0 2rem;
-    }
-
-    &__link{
-      font-size: 20px;
-      text-decoration: none;
-      color: #444;
-      letter-spacing: 2px;
-    }
-
+  &-collapse{
+    justify-content: end;
   }
+
+  &-search{
+    width: 500px;
+    &__input{
+      width: 100%;
+    }
+  }
+
 }
 
+.nav-list{
+  background-color: $other;
+  padding: 4px;
+  border-bottom: 2px solid white;
 
-// @media screen and (max-width: 1024px) {
-//   .nav{
-//     flex-direction: column;
-    
-//     & .nav-brand{
-//       padding: 1rem 0;
-//     }
-//   }
-// }
+  &__navigation{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+  }
 
-// @media screen and (max-width: 768px) {
-//   .nav{
+  &__item{
+    padding: 0 12px;
+  }
 
-//     & .nav-brand{
-
-//       &__button{
-//         display: block;
-//       }
-
-//     }
-
-//     & .navigation{
-
-//     }
-
-//   }
-  
-// }
-
+  &__link{
+    text-decoration: none;
+    color: #444;
+  }
+}
