@@ -1,50 +1,35 @@
 .navbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: $other;
-  padding: 8px; 
+  padding: 8px 10rem; 
 
-  &-brand{
+  &__brand{
+    font-size: 1.5rem;
+    text-decoration: none;
     color: #444 !important; 
   }
 
-  &-toggler{
-    border: none;
-
-    &:focus{
-      outline: none;
-      box-shadow: none;
-    }
-  }
-
-  &-collapse{
-    justify-content: end;
-  }
-
-  &-search{
-    width: 500px;
-    &__input{
-      width: 100%;
-    }
-  }
-
-}
-
-.nav-list{
-  background-color: $other;
-  padding: 4px;
-  border-bottom: 2px solid white;
-
   &__navigation{
-    display: flex;
-    justify-content: center;
     list-style: none;
-  }
-
-  &__item{
-    padding: 0 12px;
   }
 
   &__link{
     text-decoration: none;
-    color: #444;
+
   }
+
+  &__counter{
+    position: relative;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(255, 136, 0);
+    padding: 2px 6px;
+    border-radius: 100%;
+    right: 12px;
+    font-size: 10px;
+    visibility: hidden;
+  }
+
 }

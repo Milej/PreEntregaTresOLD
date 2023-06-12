@@ -4,8 +4,14 @@
   border: none;
   outline: none;
   font-size: 1rem;
+  border-radius: 4px;
 
   &:hover{
     cursor: pointer;
+  }
+
+  &--success{
+    padding: 12px 24px;
+    background-color: $success;
   }
 }

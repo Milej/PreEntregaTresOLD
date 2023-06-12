@@ -1,11 +1,4 @@
-// Muestra el menu con las categorias
-// const showCategories = document.querySelector("#showCategories");
-// showCategories.addEventListener("click", () => {
-//   document.querySelector("#categoriesList").classList.toggle("show");
-// })
-
-// Array de objetos productos
-const products = JSON.parse(`[
+[
   {
   "id": 1,
   "name": "Cat Chow Adulto Carne Y Pollo X 15 Kg",
@@ -56,7 +49,7 @@ const products = JSON.parse(`[
     "name": "Tiritas Blandas Raza Gatos Sabor Carne X 50 Gr",
     "category": "Snacks",
     "description": "El mejor alimento para tu mascota al mejor precio",
-    "image": "snacks/tiritas-raza-gato.webp",
+    "image": "alimentos/pedigree-adultos.webp",
     "price": 360,
     "stock": 100
   },
@@ -113,74 +106,5 @@ const products = JSON.parse(`[
     "image": "snacks/snack-natuplus.webp",
     "price": 3840,
     "stock": 20
-  },
-  {
-    "id": 12,
-    "name": "Collar",
-    "category": "Paseos",
-    "description": "Snacks liofilizados con alto valor nutricional (70% proteínas) con sabor original a hígado y de fácil digestión. Con la misma tecnología utilizada en el alimento para astronautas (iofilización) y materia prima de alta calidad, como la comemos en nuestras casaas. Se le pueden dar a todos los animales de compañía: perros, gatos, hurones, erizos y hámsteres. Mejora el aliento. La carne no se pega a los dientes. Favorece la digestión ante la ausencia de harinas y el bajo nivel de fibras.",
-    "image": "snacks/snack-natuplus.webp",
-    "price": 105000,
-    "stock": 20
   }
-]`)
-
-// Agregar la cantidad de productos al texto del dom
-updateQuantity("#filterQuantity", Number(products.length));
-
-// Crea todas las cards de productos en el dom
-products.forEach(product => Card(product.id, product.name, product.category, product.description, product.image, product.price, product.stock));
-
-// Obtiene las categorias
-let categories = [];
-let categoryAlimentos = 0; 
-let categorySnacks = 0; 
-let categoryPaseos = 0;
-let categoryJuguetes = 0;
-let categoryCamas = 0;
-let maxPrice = 0;
-let minPrice = 0;
-
-for (let i = 0; i < products.length; i++) {
-  
-  !categories.find( item => item === products[i].category) ? categories.push(products[i].category) : false;
-  
-  products[i].category == "Alimento" ? categoryAlimentos++ : false;
-  products[i].category == "Snacks" ? categorySnacks++ : false;
-  products[i].category == "Paseos" ? categoryPaseos++ : false;
-  products[i].category == "Juguetes" ? categoryJuguetes++ : false;
-  products[i].category == "Camas" ? categoryCamas++ : false;
-
-  // Busca el precio maximo
-  if(products[i].price > maxPrice){
-    maxPrice = products[i].price
-    const price = products.find(item => item.price >= maxPrice);
-    maxPrice = Number(price.price);
-  }
-}
-
-//Asigna los rangos del filtro de precio
-const inputPriceRange = document.querySelector("#inputPriceRange");
-inputPriceRange.value = maxPrice;
-const txtMaxPrice = document.querySelector("#maxPrice");
-txtMaxPrice.textContent = maxPrice.toString();
-
-
-// Busqueda de producto
-const inputSearch = document.querySelector("#inputSearch");
-inputSearch.addEventListener("keyup", () => {
-
-  deleteProducts();
-
-  // Busca por expresion regular, lo que sería el valor que introduce el usuario
-  const value = inputSearch.value;
-  const expresion = new RegExp(`${value}.*`, "i")
-  const findProducts = products.filter(product => expresion.test(product.name))
-  
-  findProducts.forEach(product => Card(product.id, product.name, product.category, product.description, product.image, product.price, product.stock));
-  updateQuantity("#filterQuantity", Number(findProducts.length))
-
-})
-
-// Actualiza la cantidad por categoria
-updateCategoriesQuantities();
+]
