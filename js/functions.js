@@ -78,7 +78,7 @@ function searchByPrice() {
   const input = document.querySelector("#inputPriceRange");
   const price = (input.value * maxPrice) / 100;
   const findProducts = products.filter(product => product.price <= price)
-  findProducts.forEach(product => Card(product.id, product.name, product.category, product.description, product.image, product.price, product.stock));
+  findProducts.forEach(product => CreateCard(product.id, product.name, product.category, product.description, product.image, product.price, product.stock));
   updateQuantity("#filterQuantity", Number(findProducts.length))
 
 }
@@ -99,7 +99,7 @@ function searchByCategory(button){
 
   const category = button.getAttribute("category");
   const findProducts = products.filter(product => product.category === category)
-  findProducts.forEach(product => Card(product.id, product.name, product.category, product.description, product.image, product.price, product.stock));
+  findProducts.forEach(product => CreateCard(product.id, product.name, product.category, product.description, product.image, product.price, product.stock));
   updateQuantity("#filterQuantity", Number(findProducts.length))
 
 }
@@ -213,9 +213,23 @@ function totalShoppingCart(){
 }
 
 function deleteAll(){
-  cart = [];
-  localStorage.setItem("shoppingCart", JSON.stringify(cart))
-  document.querySelector("#shoppingCart").innerHTML = "";
+  
+  Swal.fire({
+    title: "Estás seguro?",
+    text: "Vas a vaciar el carrito de compras",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: 'Vaciar carrito',
+    cancelButtonText: 'Mejor no'
+  }).then( result => {
+    if(result.isConfirmed){
+      cart = [];
+      localStorage.setItem("shoppingCart", JSON.stringify(cart))
+      document.querySelector("#shoppingCart").innerHTML = "";
+    
+      updateCartNumber()
+    }
+  })
 
-  updateCartNumber()
+  
 }
