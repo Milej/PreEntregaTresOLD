@@ -35,7 +35,7 @@
 
         <li class="navbar__item">
 
-          <a href="#" class="navbar__link">
+          <a href="#" class="navbar__link" onclick="toggleCart()">
             <img src="./img/shopping-cart.svg" >
             <span class="navbar__counter" id="cartItems">0</span>
           </a>
@@ -78,7 +78,7 @@
       <div class="filter__section">
         <h5 class="filter__subtitle">Filtro por precio</h5>
         <div class="filter__input">
-          <input type="range" id="inputPriceRange" onmouseup="searchByPrice(this)">
+          <input type="range" id="inputPriceRange"y>
           <span class="filter__input__min">0</span>
           <span class="filter__input__current" id="currentPrice"></span>
           <span class="filter__input__max" id="maxPrice">10000</span>
@@ -89,6 +89,31 @@
 
     <div class="products-container" id="productsContainer">
 
+    </div>
+
+  </section>
+
+  <section class="cart close" id="cart">
+
+    <div class="cart__header">
+      <h1 class="cart__title">Carrito</h1>
+      <button class="button cart__button" id="hideCart" onclick="toggleCart()">X</button>
+    </div>
+
+    <div class="cart__body" id="shoppingCart">
+
+      <h2 class="cart__subtitle">Articulos en tu carrito</h2>
+
+
+
+      <!-- <p class="cart__alert" id="txtAlertCart">NO hay articulos en tu carrito</p> -->
+
+    </div>
+
+    <div class="cart__footer">
+      <p class="cart__footer__total">Total: <span id="txtTotalCart">$0</span></p>
+      <button class="button button--success" id="btnBuy">Comprar</button>
+      <button class="button button--wrong" id="btnRemoveAll" onclick="deleteAll()">Vaciar</button>
     </div>
 
   </section>

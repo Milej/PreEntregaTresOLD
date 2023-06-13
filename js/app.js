@@ -125,11 +125,16 @@ const products = JSON.parse(`[
   }
 ]`)
 
+// Array de productos en el carrito
+let cart = [];
+
+let openCart = false;
+
 // Agregar la cantidad de productos al texto del dom
 updateQuantity("#filterQuantity", Number(products.length));
 
 // Crea todas las cards de productos en el dom
-products.forEach(product => Card(product.id, product.name, product.category, product.description, product.image, product.price, product.stock));
+products.forEach(product => CreateCard(product.id, product.name, product.category, product.description, product.image, product.price, product.stock));
 
 // Obtiene las categorias
 let categories = [];
@@ -165,6 +170,10 @@ inputPriceRange.value = maxPrice;
 const txtMaxPrice = document.querySelector("#maxPrice");
 txtMaxPrice.textContent = maxPrice.toString();
 
+// Filtro precio
+inputPriceRange.addEventListener("mousemove", () => changeFilterRange())
+inputPriceRange.addEventListener("click", () => changeFilterRange())
+inputPriceRange.addEventListener("mouseup", () => searchByPrice())
 
 // Busqueda de producto
 const inputSearch = document.querySelector("#inputSearch");
@@ -184,3 +193,17 @@ inputSearch.addEventListener("keyup", () => {
 
 // Actualiza la cantidad por categoria
 updateCategoriesQuantities();
+
+// Dibujo el carrito con los lados del localstorage
+const getShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
+
+if(getShoppingCart != ""){
+  
+  // getShoppingCart.forEach(product => );
+  getShoppingCart.forEach(product => {
+    cart.push(product)
+    CreateCartCard(product.id, product.name, product.category, product.description, product.image, product.price, product.quantity)
+  })
+
+  updateCartNumber();
+}

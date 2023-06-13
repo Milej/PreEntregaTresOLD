@@ -5,13 +5,23 @@
   outline: none;
   font-size: 1rem;
   border-radius: 4px;
+  padding: 12px 24px;
 
   &:hover{
     cursor: pointer;
   }
 
   &--success{
-    padding: 12px 24px;
     background-color: $success;
+  }
+
+  &--info{
+    padding: 0 8px;
+    background-color: $info;
+  }
+
+  &--wrong{
+    padding: 0 8px;
+    background-color: $error;
   }
 }
