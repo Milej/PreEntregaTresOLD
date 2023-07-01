@@ -19,7 +19,7 @@ let openCart = false;
 
 const Start = async() => {
 
-  const products = GetProducts();
+  const products = await GetProducts();
 
   //Crea todas las cards de productos en el dom
   products.forEach(product => {
@@ -68,8 +68,7 @@ inputSearch.addEventListener("keyup", async () => {
 
   DeleteProducts();
 
-  const response = await fetch("./js/products.json");
-  const products = await response.json();
+  const products = await GetProducts();
 
   // Busca por expresion regular, lo que sería el valor que introduce el usuario
   const value = inputSearch.value;
@@ -86,7 +85,6 @@ const getShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
 
 if(getShoppingCart != ""){
   
-  // getShoppingCart.forEach(product => );
   getShoppingCart.forEach(product => {
     cart.push(product)
     CreateCartCard(product.id, product.name, product.category, product.description, product.image, product.price, product.quantity)

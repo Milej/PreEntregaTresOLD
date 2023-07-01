@@ -77,9 +77,11 @@ const UpdateCategoriesQuantities = () => {
   UpdateQuantity("#txtCamas", categoryCamas)
 }
 
-function SearchByPrice() {
+async function SearchByPrice() {
 
   DeleteProducts();
+
+  const products = await GetProducts();
 
   const input = document.querySelector("#inputPriceRange");
   const price = (input.value * maxPrice) / 100;

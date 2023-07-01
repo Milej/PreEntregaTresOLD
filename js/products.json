@@ -46,11 +46,11 @@
   },
   {
     "id": 6,
-    "name": "Tiritas Blandas Raza Gatos Sabor Carne X 50 Gr",
+    "name": "Bocaditos De La Granja X 45 Gr Golomiau",
     "category": "Snacks",
-    "description": "El mejor alimento para tu mascota al mejor precio",
-    "image": "alimentos/pedigree-adultos.webp",
-    "price": 360,
+    "description": "Bocaditos semi húmedos con sabores de la granja. Cuentan con el aporte de Taurina, que mejora la digestión. Además, contiene antioxidantes. Su incorporación permite reemplazar galletitas y golosinas dulces y otros productos de consumo humano no aptos para gatos.",
+    "image": "snacks/bocaditos-granja.webp",
+    "price": 319,
     "stock": 100
   },
   {
@@ -106,5 +106,77 @@
     "image": "snacks/snack-natuplus.webp",
     "price": 3840,
     "stock": 20
+  },
+  {
+    "id": 13,
+    "name": "Chapita Cream Labrador",
+    "category": "Paseos",
+    "description": "",
+    "image": "paseos/chapita-cream.webp",
+    "price": 4551,
+    "stock": 12
+  },
+  {
+    "id": 14,
+    "name": "Correa Extensible Flexible M 5 M Azul Perro Hasta 20 Kg",
+    "category": "Paseos",
+    "description": "Correa extensible con botón de frenado para paseo de mascotas de hasta 20 kilos. Diseño de manija ergonómico para evitar lesiones en las manos. Largo total: 5 metros.",
+    "image": "paseos/correa-extensible.webp",
+    "price": 13310,
+    "stock": 5
+  },
+  {
+    "id": 15,
+    "name": "Transportadora Para Perro Chico Skudo",
+    "category": "Paseos",
+    "description": "Esta transportadora está fabricada con materiales resistentes que garantizan la seguridad para el transporte de tu mascota.Cuenta con un diseño con ventanas laterales que permite el flujo óptimo de aire. Además, posee una reja superior que facilita aún más el acceso de la mascota a la transportadora. Medidas: 55 cm (largo) x 36 cm (ancho) x 35 cm (alto).",
+    "image": "paseos/transportadora.webp",
+    "price": 28756,
+    "stock": 3
+  },
+  {
+    "id": 16,
+    "name": "Pelota Maciza De 40 Mm",
+    "category": "Juguetes",
+    "description": "Pelota sólida pensada para divertir a perros con dentaduras fuertes. Al morderla, tu perro liberará estrés además de entretenerse. Sirve también para que ejercite su mandíbula. Tiene 4 cm de diámetro y está fabricada en goma maciza de alta densidad.",
+    "image": "juguetes/pelota.webp",
+    "price": 183,
+    "stock": 376
+  },
+  {
+    "id": 17,
+    "name": "Gigwy Egg Wobble Cock Tpr/Plush",
+    "category": "Juguetes",
+    "description": "",
+    "image": "juguetes/pollo.webp",
+    "price": 6183,
+    "stock": 20
+  },
+  {
+    "id": 18,
+    "name": "Cama Dogit Rectangular Con Corderito Negra Mediana",
+    "category": "Camas",
+    "description": "Las camas Donut tienen corderito en el interior para brindar sensación de comodidad y calor a tu mascota. Su diseño rectangular amplio brinda el espacio que tu perro necesita para un apropiado descanso. Medidas: 60 x 51 x 23 cm.",
+    "image": "camas/cama-dogit.webp",
+    "price": 15532,
+    "stock": 7
+  },
+  {
+    "id": 19,
+    "name": "Cama Para Mascotas Mod Cama Patagonia J T:7 15Hx135X85 Negro Huellas",
+    "category": "Camas",
+    "description": "",
+    "image": "camas/cama-patagonia.webp",
+    "price": 42265,
+    "stock": 3
+  },
+  {
+    "id": 20,
+    "name": "Abrigo De Jean Para Perro Con Corderito Modelo Jana Talle 75",
+    "category": "Camas",
+    "description": "Abrigo de jean con corderito interno que le brinda a tu perro máxima protección a las bajas temperaturas. Es súper cómodo y abrigado. Tiene las costuras reforzadas que le otorgan mayor durabilidad. La cinta de ajuste rayada es regulable, se adapta a todo tipo de cuerpo y además le da un toque de distinción. Es apto para lavarropas.",
+    "image": "camas/abrigo.webp",
+    "price": 22463,
+    "stock": 3
   }
 ]
