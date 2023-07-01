@@ -1,3 +1,9 @@
+// Obtenemos los datos del json con una funcion asincrona
+const GetProducts = async() => {
+  const response = await fetch("./js/products.json");
+  return await response.json();
+}
+
 // Crea una card
 function CreateCard(id, name, category, description, imageName, price, stock){
 
@@ -10,7 +16,7 @@ function CreateCard(id, name, category, description, imageName, price, stock){
   card.innerHTML += `
   <img src="./img/productos/${imageName}" class="card__image">
   <div class="card-body">
-    <h5 class="card-body__title">$ ${toPeso(price)}</h5>
+    <h5 class="card-body__title">$ ${ToPeso(price)}</h5>
     <p class="card-body__text">${name}</p>
   </div>
   <div class="card-footer">
@@ -35,7 +41,7 @@ function CreateCartCard(id, name, category, description, imageName, price, quant
         
   <span class="cart-card__name">${name}</span>
   
-  <span class="cart-card__price">$ ${toPeso(price)}</span>
+  <span class="cart-card__price">$ ${ToPeso(price)}</span>
   
   <div class="cart-card__buttons">
     <button class="button button--info btnSubstract">-</button>
@@ -51,39 +57,39 @@ function CreateCartCard(id, name, category, description, imageName, price, quant
 } 
 
 // Convierte a moneda
-const toPeso = (value) => new Intl.NumberFormat("es-AR").format(value);
+const ToPeso = (value) => new Intl.NumberFormat("es-AR").format(value);
 
 // Actualiza la cantidad de productos
-const updateQuantity = (dom, value) => {
+const UpdateQuantity = (dom, value) => {
   const txtFilterQuantity = document.querySelector(dom);
   txtFilterQuantity.textContent = value.toString();
 }
 
 // Borra las cards
-const deleteProducts = () => document.querySelector("#productsContainer").innerHTML = "";
+const DeleteProducts = () => document.querySelector("#productsContainer").innerHTML = "";
 
 // Actualiza la cantidad de todas las categorias
-const updateCategoriesQuantities = () => {
-  updateQuantity("#txtAlimentos", categoryAlimentos)
-  updateQuantity("#txtSnacks", categorySnacks)
-  updateQuantity("#txtPaseos", categoryPaseos)
-  updateQuantity("#txtJuguetes", categoryJuguetes)
-  updateQuantity("#txtCamas", categoryCamas)
+const UpdateCategoriesQuantities = () => {
+  UpdateQuantity("#txtAlimentos", categoryAlimentos)
+  UpdateQuantity("#txtSnacks", categorySnacks)
+  UpdateQuantity("#txtPaseos", categoryPaseos)
+  UpdateQuantity("#txtJuguetes", categoryJuguetes)
+  UpdateQuantity("#txtCamas", categoryCamas)
 }
 
-function searchByPrice() {
+function SearchByPrice() {
 
-  deleteProducts();
+  DeleteProducts();
 
   const input = document.querySelector("#inputPriceRange");
   const price = (input.value * maxPrice) / 100;
   const findProducts = products.filter(product => product.price <= price)
   findProducts.forEach(product => CreateCard(product.id, product.name, product.category, product.description, product.image, product.price, product.stock));
-  updateQuantity("#filterQuantity", Number(findProducts.length))
+  UpdateQuantity("#filterQuantity", Number(findProducts.length))
 
 }
 
-function changeFilterRange(){
+function ChangeFilterRange(){
   
   const input = document.querySelector("#inputPriceRange");
   const txtCurrent = document.querySelector('#currentPrice');
@@ -95,12 +101,12 @@ function changeFilterRange(){
 
 function searchByCategory(button){
 
-  deleteProducts();
+  DeleteProducts();
 
   const category = button.getAttribute("category");
   const findProducts = products.filter(product => product.category === category)
   findProducts.forEach(product => CreateCard(product.id, product.name, product.category, product.description, product.image, product.price, product.stock));
-  updateQuantity("#filterQuantity", Number(findProducts.length))
+  UpdateQuantity("#filterQuantity", Number(findProducts.length))
 
 }
 
@@ -160,7 +166,7 @@ function showAlert(title, message, icon){
   )
 }
 
-function updateCartNumber(){
+function UpdateCartNumber(){
 
   const productsInCart = cart.length;
   const cartItems = document.querySelector("#cartItems");
@@ -209,7 +215,7 @@ function totalShoppingCart(){
   const total = cart.reduce( (accum, product) => accum + product.price, 0)
   const txtTotal = document.querySelector("#txtTotalCart");
 
-  txtTotal.textContent = `$${toPeso(total)}`;
+  txtTotal.textContent = `$${ToPeso(total)}`;
 }
 
 function deleteAll(){
