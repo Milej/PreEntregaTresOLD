@@ -92,7 +92,7 @@ if(inputSearch){
 // Dibujo el carrito con los datos del localstorage
 const getShoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
 
-if(getShoppingCart != ""){
+if(getShoppingCart != "" && getShoppingCart != null){
   
   getShoppingCart.forEach(product => {
     cart.push(product)

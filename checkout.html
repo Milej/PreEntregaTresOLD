@@ -19,7 +19,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.3.0/build/global/luxon.min.js" integrity="sha256-Nn+JGDrq3PuTxcDfJmmI0Srj5LpfOFlKqEiPwQK7y40=" crossorigin="anonymous"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js" integrity="sha512-KaIyHb30iXTXfGyI9cyKFUIRSSuekJt6/vqXtyQKhQP6ozZEGY8nOtRS6fExqE4+RbYHus2yGyYg1BrqxzV6YA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -35,7 +35,7 @@
     <h2>Finalizar compra</h2>
   </header>
 
-  <section class="checkout">
+  <form class="checkout" id="checkoutForm">
     
     <div class="checkout__cart">
 
@@ -45,17 +45,98 @@
 
       </div>
 
+      <div class="shipping">
+
+        <div class="input-container">
+          <label for="shippingYes" id="txtShippingYes">Envío a domicilio</label>
+          <input type="radio" name="shipping" id="shippingYes" checked>
+        </div>
+
+        <div class="input-container">
+          <label for="shippingFast" id="txtShippingFast">Envío rayo</label>
+          <input type="radio" name="shipping" id="shippingFast">
+        </div>
+  
+        <div class="input-container">
+          <label for="shippingNo">Retiro en sucursal</label>
+          <input type="radio" name="shipping" id="shippingNo">
+        </div>
+      </div>
+
     </div>
 
     <div class="checkout__data">
+
+      <div class="input-container">
+        <label for="inputName">Nombre</label>
+        <input type="text" id="inputName">
+      </div>
+
+      <div class="input-container">
+        <label for="inputLastname">Apellido</label>
+        <input type="text" id="inputLastname">
+      </div>
+
+      <div class="input-container">
+        <label for="inputPhone">Telefono</label>
+        <input type="text" id="inputPhone">
+      </div>
+
+      <div class="input-container">
+        <label for="inputEmail">Correo electrónico</label>
+        <input type="text" id="inputEmail">
+      </div>
+
+      <div class="input-container">
+        <label for="inputProvince">Provincia</label>
+        <input type="text" id="inputProvince">
+      </div>
+
+      <div class="input-container">
+        <label for="inputLocation">Localidad</label>
+        <input type="text" id="inputLocation">
+      </div>
+
+      <div class="input-container">
+        <label for="inputPC">Codigo Postal</label>
+        <input type="text" id="inputPC">
+      </div>
 
     </div>
 
     <div class="checkout__payment">
 
+      <div class="input-container">
+        <label for="inputCardName">Nombre como aparece en la tarjeta</label>
+        <input type="text" name="" id="inputCardName">
+      </div>
+
+      <div class="input-container">
+        <label for="inputCardNumber">Número</label>
+        <input type="text" name="" id="inputCardNumber">
+      </div>
+
+      <div class="input-container">
+        <label for="inputCardDate">Fecha vencimiento</label>
+        <input type="text" name="" id="inputCardDate">
+      </div>
+
+      <div class="input-container">
+        <label for="inputCardCode">Codigo de seguridad</label>
+        <input type="password" name="" id="inputCardCode">
+      </div>
+
+      <div class="totals">
+        <h4>Subtotal: <span id="txtSubtotal"></span></h4>
+        <h4>Envío: <span id="txtShipping"></span></h4>
+        <h4>Total: <span id="txtTotal"></span></h4>
+      </div>
+
+      <button type="submit" class="button button--success" id="finishOrder">Finalizar compra</button>
+ 
     </div>
 
-  </section>
+  </form>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 

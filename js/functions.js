@@ -44,11 +44,11 @@ function CreateCartCard(id, name, category, description, imageName, price, quant
   <span class="cart-card__price">$ ${ToPeso(price)}</span>
   
   <div class="cart-card__buttons">
-    <button class="button button--info" onclick="Substract(this)">-</button>
+    <button type="button" class="button button--info" onclick="Substract(this)">-</button>
     <span class="cart-card__quantity">${quantity}</span>
-    <button class="button button--info" onclick="Add(this)">+</button>
+    <button type="button" class="button button--info" onclick="Add(this)">+</button>
   </div>
-  <button class="button button--wrong" onclick="deleteProduct(${id})"><span class="material-symbols-outlined">
+  <button type="button" class="button button--wrong" onclick="deleteProduct(${id})"><span class="material-symbols-outlined">
     delete
     </span></button>
   `;
@@ -185,14 +185,16 @@ function UpdateCartNumber(){
   const productsInCart = cart.reduce( (accum, product) => accum + product.quantity, 0)
   const cartItems = document.querySelector("#cartItems");
 
-  if(productsInCart > 0 || getShoppingCart > 0){
-    cartItems.style.visibility = "visible"
-    cartItems.textContent = productsInCart.toString();
-  }else{
-    cartItems.style.visibility = "hidden";
+  if(cartItems){
+    if(productsInCart > 0 || getShoppingCart > 0){
+      cartItems.style.visibility = "visible"
+      cartItems.textContent = productsInCart.toString();
+    }else{
+      cartItems.style.visibility = "hidden";
+    }
+  
+    totalShoppingCart()
   }
-
-  totalShoppingCart()
 }
 
 function toggleCart(){
@@ -238,9 +240,12 @@ function deleteProduct(id){
 
 function totalShoppingCart(){
   const total = cart.reduce( (accum, product) => accum + (product.price * product.quantity), 0)
-  const txtTotal = document.querySelector("#txtTotalCart");
+  const txtSubtotal = document.querySelector("#txtSubtotal");
 
-  txtTotal.textContent = `$${ToPeso(total)}`;
+  txtSubtotal.textContent = `$${ToPeso(total)}`;
+  txtSubtotal.setAttribute("subtotal", total);
+
+  UpdateOrder();
 }
 
 function deleteAll(){
@@ -279,6 +284,10 @@ function UpdateCart(){
   totalShoppingCart();
 
   ShowCartButtons();
+
+  if(shoppingCart.length <= 0 && document.querySelector("#finishOrder")){
+    window.location.href = "/"
+  }
 }
 
 function Substract(e){
@@ -338,12 +347,38 @@ function ShowCartButtons(){
   const btnRemoveAll = document.querySelector("#btnRemoveAll");
   const btnBuy = document.querySelector("#btnBuy");
 
-  if(shoppingCart != ""){
-    btnRemoveAll.classList.remove("no-show");
-    btnBuy.classList.remove("no-show");
-  }else{
-    btnRemoveAll.classList.add("no-show");
-    btnBuy.classList.add("no-show");
+  if(btnRemoveAll || btnBuy){
+
+    if(shoppingCart != ""){
+      btnRemoveAll.classList.remove("no-show");
+      btnBuy.classList.remove("no-show");
+    }else{
+      btnRemoveAll.classList.add("no-show");
+      btnBuy.classList.add("no-show");
+    }
+
   }
   
+}
+
+function UpdateOrder(){
+
+  const txtTotal = document.querySelector("#txtTotal");
+  const txtShipping = document.querySelector("#txtShipping");
+  const txtShippingYes = document.querySelector("#txtShippingYes");
+  const txtShippingFast = document.querySelector("#txtShippingFast");
+
+  if(txtShipping){
+
+    const total = Number(txtShipping.getAttribute("shipping")) + Number(txtSubtotal.getAttribute("subtotal"));
+
+    txtTotal.textContent = `$${ToPeso(total)}`;
+    txtTotal.setAttribute("total", total);
+  
+    const arrive = today.plus({days: shippingTime}).toLocaleString();
+    txtShippingYes.textContent = `Envío a domicilio (${arrive})`
+
+    const fastArrive = today.plus({days: rayoTime}).toLocaleString();
+    txtShippingFast.textContent = `Envío rayo (${fastArrive})`
+  }
 }
