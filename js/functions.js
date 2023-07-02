@@ -390,7 +390,7 @@ function Redirection(){
   const h = q[3];
 
   if(q.length === 5){
-    window.location.href = url+h;  
+    window.location.href = url+"/"+h;  
   }else if(q.length === 4){
     window.location.href = url;  
   }
