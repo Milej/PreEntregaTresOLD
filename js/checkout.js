@@ -24,7 +24,7 @@ async function LoadPage() {
   }
 
   if(products.length <= 0){
-    window.location.href = location.origin;
+    Redirection()
   }
   
   txtShipping.textContent = `$${ToPeso(shippingTotal)}`;
@@ -114,7 +114,7 @@ if(form){
             icon: "success",
             confirmButtonText: "Aceptar",
           }).then(() => {
-            window.location.href = location.origin;
+            Redirection();
           })
 
         }

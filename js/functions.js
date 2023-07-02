@@ -286,7 +286,7 @@ function UpdateCart(){
   ShowCartButtons();
 
   if(shoppingCart.length <= 0 && document.querySelector("#finishOrder")){
-    window.location.href = location.origin;
+    Redirection();
   }
 }
 
@@ -380,5 +380,18 @@ function UpdateOrder(){
 
     const fastArrive = today.plus({days: rayoTime}).toLocaleString();
     txtShippingFast.textContent = `Envío rayo (${fastArrive})`
+  }
+}
+
+function Redirection(){
+
+  const url = window.location.origin;
+  const q = window.location.href.split("/");
+  const h = q[3];
+
+  if(q.length === 5){
+    window.location.href = url+h;  
+  }else if(q.length === 4){
+    window.location.href = url;  
   }
 }
