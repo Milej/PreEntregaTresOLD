@@ -286,7 +286,7 @@ function UpdateCart(){
   ShowCartButtons();
 
   if(shoppingCart.length <= 0 && document.querySelector("#finishOrder")){
-    window.location.href = "/"
+    window.location.href = location.origin;
   }
 }
 
