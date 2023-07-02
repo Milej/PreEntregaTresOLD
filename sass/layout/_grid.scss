@@ -21,6 +21,27 @@
   }
 }
 
+.checkout-header{
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.checkout{
+  display: grid;
+  grid-template-columns: repeat(3, 3fr);
+  width: 100%;
+
+  h3{
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+  }
+
+  &__cart{
+    background-color: white;
+    padding: 1rem;
+  }
+}
+
 .filter{
   justify-self: center;
 
@@ -31,6 +52,7 @@
   &__subtitle{
     font-size: 1rem;
     font-weight: bold;
+    cursor: pointer;
   }
 
   &__categories{

@@ -1,18 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
-* {
-  padding: 0;
-  margin: 0;
-  font-family: "Quicksand", sans-serif;
-}
-
-.no-show {
-  display: none;
-}
-
-.show {
-  display: block;
-}
-
 .button {
   background-color: transparent;
   color: white;
@@ -21,6 +7,7 @@
   font-size: 1rem;
   border-radius: 4px;
   padding: 12px 24px;
+  text-decoration: none;
 }
 .button:hover {
   cursor: pointer;
@@ -88,6 +75,8 @@
 }
 .navbar__navigation {
   list-style: none;
+  position: fixed;
+  right: 0;
 }
 .navbar__link {
   text-decoration: none;
@@ -126,6 +115,25 @@
   place-self: center;
 }
 
+.checkout-header {
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.checkout {
+  display: grid;
+  grid-template-columns: repeat(3, 3fr);
+  width: 100%;
+}
+.checkout h3 {
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+.checkout__cart {
+  background-color: white;
+  padding: 1rem;
+}
+
 .filter {
   justify-self: center;
 }
@@ -135,6 +143,7 @@
 .filter__subtitle {
   font-size: 1rem;
   font-weight: bold;
+  cursor: pointer;
 }
 .filter__categories {
   list-style: none;
@@ -236,6 +245,40 @@
 }
 .cart-card__quantity, .cart-card__price {
   font-weight: bold;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+}
+
+.no-show {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.toastify {
+  font-size: 1rem !important;
+  color: black !important;
+  max-width: 300px !important;
+  display: flex !important;
+}
+.toastify--success {
+  background: #bed54a !important;
+}
+.toastify--error {
+  background: #ffac94 !important;
+}
+
+.toastify-avatar {
+  margin: 0 !important;
+  width: 80px !important;
+  height: 80px !important;
+  margin-right: 12px !important;
 }
 
 /*# sourceMappingURL=app.css.map */

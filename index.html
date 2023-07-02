@@ -66,7 +66,7 @@
     <div class="filter">
 
       <div class="filter__section">
-        <h5 class="filter__subtitle">Todos los productos</h5>
+        <h5 class="filter__subtitle" onclick="ShowAllProducts()">Todos los productos</h5>
         <span><span id="filterQuantity">0</span> productos</span>
       </div>
 
@@ -74,11 +74,11 @@
         <h5 class="filter__subtitle">Categorías</h5>
 
         <ul class="filter__categories">
-          <li class="filter__categories-button" category="Alimento" onclick="searchByCategory(this)">Alimentos (<span id="txtAlimentos">0</span>)</li>
-          <li class="filter__categories-button" category="Snacks" onclick="searchByCategory(this)">Snacks (<span id="txtSnacks">0</span>)</li>
-          <li class="filter__categories-button" category="Paseos" onclick="searchByCategory(this)">Paseos y viajes (<span id="txtPaseos">0</span>)</li>
-          <li class="filter__categories-button" category="Juguetes" onclick="searchByCategory(this)">Juguetes (<span id="txtJuguetes">0</span>)</li>
-          <li class="filter__categories-button" category="Camas" onclick="searchByCategory(this)">Camas e indumentaria (<span id="txtCamas">0</span>)</li>
+          <li class="filter__categories-button" category="Alimento" onclick="SearchByCategory(this)">Alimentos (<span id="txtAlimentos">0</span>)</li>
+          <li class="filter__categories-button" category="Snacks" onclick="SearchByCategory(this)">Snacks (<span id="txtSnacks">0</span>)</li>
+          <li class="filter__categories-button" category="Paseos" onclick="SearchByCategory(this)">Paseos y viajes (<span id="txtPaseos">0</span>)</li>
+          <li class="filter__categories-button" category="Juguetes" onclick="SearchByCategory(this)">Juguetes (<span id="txtJuguetes">0</span>)</li>
+          <li class="filter__categories-button" category="Camas" onclick="SearchByCategory(this)">Camas e indumentaria (<span id="txtCamas">0</span>)</li>
         </ul>
       </div>
 
@@ -86,7 +86,7 @@
         <h5 class="filter__subtitle">Filtro por precio</h5>
         <div class="filter__input">
           <input type="range" id="inputPriceRange"y>
-          <span class="filter__input__min">0</span>
+          <span class="filter__input__min" id="minPrice">0</span>
           <span class="filter__input__current" id="currentPrice"></span>
           <span class="filter__input__max" id="maxPrice">10000</span>
         </div>
@@ -107,19 +107,12 @@
       <button class="button cart__button" id="hideCart" onclick="toggleCart()">X</button>
     </div>
 
-    <div class="cart__body" id="shoppingCart">
-
-      <h2 class="cart__subtitle">Articulos en tu carrito</h2>
-
-
-      <!-- <p class="cart__alert" id="txtAlertCart">NO hay articulos en tu carrito</p> -->
-
-    </div>
+    <div class="cart__body" id="shoppingCart"></div>
 
     <div class="cart__footer">
       <p class="cart__footer__total">Total: <span id="txtTotalCart">$0</span></p>
-      <button class="button button--success" id="btnBuy">Comprar</button>
-      <button class="button button--wrong" id="btnRemoveAll" onclick="deleteAll()">Vaciar</button>
+      <a href="checkout.html" class="button button--success no-show" id="btnBuy">Comprar</a>
+      <button class="button button--wrong no-show" id="btnRemoveAll" onclick="deleteAll()">Vaciar</button>
     </div>
 
   </section>

@@ -20,7 +20,7 @@ function CreateCard(id, name, category, description, imageName, price, stock){
     <p class="card-body__text">${name}</p>
   </div>
   <div class="card-footer">
-    <button class="button button--success" onclick="addToCart(this)">Agregar al carrito</button>
+    <button class="button button--success" onclick="AddToCart(this)">Agregar al carrito</button>
   </div>
   `;
 
@@ -44,11 +44,11 @@ function CreateCartCard(id, name, category, description, imageName, price, quant
   <span class="cart-card__price">$ ${ToPeso(price)}</span>
   
   <div class="cart-card__buttons">
-    <button class="button button--info btnSubstract">-</button>
+    <button class="button button--info" onclick="Substract(this)">-</button>
     <span class="cart-card__quantity">${quantity}</span>
-    <button class="button button--info btnAdd">+</button>
+    <button class="button button--info" onclick="Add(this)">+</button>
   </div>
-  <button class="button button--wrong" onclick="deleteProduct(this)"><span class="material-symbols-outlined">
+  <button class="button button--wrong" onclick="deleteProduct(${id})"><span class="material-symbols-outlined">
     delete
     </span></button>
   `;
@@ -95,15 +95,17 @@ function ChangeFilterRange(){
   
   const input = document.querySelector("#inputPriceRange");
   const txtCurrent = document.querySelector('#currentPrice');
-  const price = (input.value * maxPrice) / 100;
+  const price = parseInt((input.value * maxPrice) / 100);
 
   txtCurrent.textContent = price.toString();
 
 }
 
-function searchByCategory(button){
+async function SearchByCategory(button){
 
   DeleteProducts();
+
+  const products = await GetProducts();
 
   const category = button.getAttribute("category");
   const findProducts = products.filter(product => product.category === category)
@@ -112,13 +114,15 @@ function searchByCategory(button){
 
 }
 
-const searchByID = (id, array) => array.find(product => product.id === Number(id));
+const SearchByID = (id, array) => array.find(product => product.id === Number(id));
 
-function addToCart(productCard){
+async function AddToCart(productCard){
+
+  const products = await GetProducts();
 
   const id = productCard.parentElement.parentElement.getAttribute("product");
-  const productInCart = searchByID(id, cart);
-  const product = searchByID(id, products);
+  const productInCart = SearchByID(id, cart);
+  const product = SearchByID(id, products);
 
   // Si el producto es undefined es porque no está en el carrito todavía, sino se le agrega 1
   if(productInCart === undefined){
@@ -126,38 +130,47 @@ function addToCart(productCard){
     if(product.stock > 0){
       
       product.quantity = 1;
+      
       cart.push(product)
       CreateCartCard(product.id, product.name, product.category, product.description, product.image, product.price, product.quantity)
 
-      // localStorage.setItem("shoppingCart", JSON.stringify(cart))
-
-      showAlert("Bien", `Has agregado ${product.name} al carrito`, "success")
+      ToastMessage(`Has agregado ${product.name} al carrito`, "success", `./img/productos/${product.image}`);
 
     }else{
 
-      showAlert("Error", `No puedes agregar el producto, porque ya no tenemos este articulo disponible`, "info");
+      ToastMessage(`No puedes agregar el producto, porque ya no tenemos este articulo disponible`, "error")
     }
 
   }else{
-
-    const existentProduct = searchByID(id, cart);
     
-    if(product.stock > existentProduct.quantity){
-      existentProduct.quantity++;
-      showAlert("Bien", `Has agregado ${product.name} al carrito`, "success")
+    if(product.stock > productInCart.quantity){
+      productInCart.quantity++;
+      ToastMessage(`Has agregado ${product.name} al carrito`, "success", `./img/productos/${product.image}`);
       
     }else{
 
-      showAlert("Error", `No puedes agregar el producto, porque ya no tenemos este articulo disponible`, "info");
+      ToastMessage(`No puedes agregar el producto, porque ya no tenemos este articulo disponible`, "error")
     }
-
     
   }
 
   localStorage.setItem("shoppingCart", JSON.stringify(cart))
 
-  updateCartNumber();
+  UpdateCart();
 
+}
+
+function ToastMessage(text, type = "success", avatar){
+  Toastify({
+    avatar,
+    text,
+    duration: 3000,
+    close: true,
+    gravity: "top",
+    position: "right",
+    stopOnFocus: true,
+    className: `toastify--${type}`
+  }).showToast();
 }
 
 function showAlert(title, message, icon){
@@ -169,8 +182,7 @@ function showAlert(title, message, icon){
 }
 
 function UpdateCartNumber(){
-
-  const productsInCart = cart.length;
+  const productsInCart = cart.reduce( (accum, product) => accum + product.quantity, 0)
   const cartItems = document.querySelector("#cartItems");
 
   if(productsInCart > 0 || getShoppingCart > 0){
@@ -203,18 +215,29 @@ function toggleCart(){
   }
 }
 
-function deleteProduct(input){
-  
-  const id = input.parentElement.parentElement.getAttribute("product");
+function deleteProduct(id){
 
-  const product = cart.find(product => product.id === Number(id))
+  Swal.fire({
+    title: "Advertencia",
+    text: "Seguro que quieres quitar el producto?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: 'Quitar producto',
+    cancelButtonText: 'Mejor no'
+  }).then( result => {
+    if(result.isConfirmed){
+      cart = cart.filter(product => product.id !== Number(id))
 
-  console.log(product)
+      localStorage.setItem("shoppingCart", JSON.stringify(cart));
+
+      UpdateCart();
+    }
+  })
   
 }
 
 function totalShoppingCart(){
-  const total = cart.reduce( (accum, product) => accum + product.price, 0)
+  const total = cart.reduce( (accum, product) => accum + (product.price * product.quantity), 0)
   const txtTotal = document.querySelector("#txtTotalCart");
 
   txtTotal.textContent = `$${ToPeso(total)}`;
@@ -235,9 +258,92 @@ function deleteAll(){
       localStorage.setItem("shoppingCart", JSON.stringify(cart))
       document.querySelector("#shoppingCart").innerHTML = "";
     
-      updateCartNumber()
+      UpdateCart()
     }
   })
 
+}
+
+function UpdateCart(){
+
+  const container = document.querySelector("#shoppingCart");
+  container.innerHTML = "";
+  const shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
+
+  shoppingCart.forEach(product => {
+    CreateCartCard(product.id, product.name, product.category, product.description, product.image, product.price, product.quantity)
+  })
+
+  UpdateCartNumber();
+
+  totalShoppingCart();
+
+  ShowCartButtons();
+}
+
+function Substract(e){
+  const id = e.parentElement.parentElement.getAttribute("product");
+
+  const product = cart.find(product => product.id === Number(id))
+  
+  if(product.quantity > 1){
+    product.quantity--;
+  }else{
+    deleteProduct(id);
+  }
+
+  localStorage.setItem("shoppingCart", JSON.stringify(cart));
+
+  UpdateCart();
+  
+}
+
+async function Add(e){
+  const id = e.parentElement.parentElement.getAttribute("product");
+
+  const products = await GetProducts();
+
+  const product = cart.find(product => product.id === Number(id))
+  const {stock} = SearchByID(id, products);
+
+  if(product.quantity < stock){
+    product.quantity++;
+  }else{
+    ToastMessage(`No puedes agregar el producto, porque ya no tenemos este articulo disponible`, "error")
+  }
+
+  localStorage.setItem("shoppingCart", JSON.stringify(cart));
+
+  UpdateCart();
+  
+}
+
+async function ShowAllProducts(){
+
+  DeleteProducts();
+
+  const products = await GetProducts();
+
+  //Crea todas las cards de productos en el dom
+  products.forEach(product => {
+    CreateCard(product.id, product.name, product.category, product.description, product.image, product.price, product.price);
+  });
+
+  UpdateQuantity("#filterQuantity", Number(products.length));
+}
+
+function ShowCartButtons(){
+
+  const shoppingCart = JSON.parse(localStorage.getItem("shoppingCart"));
+  const btnRemoveAll = document.querySelector("#btnRemoveAll");
+  const btnBuy = document.querySelector("#btnBuy");
+
+  if(shoppingCart != ""){
+    btnRemoveAll.classList.remove("no-show");
+    btnBuy.classList.remove("no-show");
+  }else{
+    btnRemoveAll.classList.add("no-show");
+    btnBuy.classList.add("no-show");
+  }
   
 }

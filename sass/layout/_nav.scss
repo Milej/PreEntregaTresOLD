@@ -13,11 +13,12 @@
 
   &__navigation{
     list-style: none;
+    position: fixed;
+    right: 0;
   }
 
   &__link{
     text-decoration: none;
-
   }
 
   &__counter{

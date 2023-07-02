@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
 
+@import "./utilities/variables";
+@import "./utilities/mixins";
+@import "./utilities/functions";
+
+@import "./components/buttons";
+@import "./components/inputs";
+@import "./components/cards";
+@import "./components/images";
+
+@import "./layout/nav";
+@import "./layout/grid";
+
 *{
   padding: 0;
   margin: 0;
@@ -14,14 +26,24 @@
   display: block;
 }
 
-@import "./utilities/variables";
-@import "./utilities/mixins";
-@import "./utilities/functions";
+.toastify{
+  font-size: 1rem !important;
+  color: black !important;
+  max-width: 300px !important;
+  display: flex !important;
 
-@import "./components/buttons";
-@import "./components/inputs";
-@import "./components/cards";
-@import "./components/images";
+  &--success{
+    background: $success !important;
+  }
 
-@import "./layout/nav";
-@import "./layout/grid";
+  &--error{
+    background: $error !important;
+  }
+}
+
+.toastify-avatar{
+  margin: 0 !important;
+  width: 80px !important;
+  height: 80px !important;
+  margin-right: 12px !important;
+}
